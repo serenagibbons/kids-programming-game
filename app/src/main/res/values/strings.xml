@@ -1,6 +1,7 @@
 <resources>
-    <!--Text labels-->
     <string name="app_name">Kids Programming Game</string>
+
+    <!--Prompts-->
     <string name="promptLogIn">Already have an account?</string>
     <string name="promptPlay">Ready to play?</string>
 
@@ -8,5 +9,30 @@
     <string name="label_btnChildSign">Log in as Child</string>
     <string name="label_btnParentSign">Log in as Parent</string>
     <string name="label_btnSignUp">Sign Up</string>
+
+    <!--- labels -->
+    <string name="label_signUp">Sign up</string>
+    <string name="label_signIn">Sign in </string>
+    <string name="play">Play</string>
+    <string name="history">View history</string>
+    <string name="firstName">First Name</string>
+    <string name="lastName">Last Name</string>
+    <string name="email">Email</string>
+    <string name="dob">Date of Birth</string>
+    <string name="dobFormat">MM/dd/yy</string>
+    <string name="password">Password</string>
+    <string name="question_number">Question %d</string>
+    <string name="label_history">History</string>
+    <string name="submit">Submit</string>
+
+    <!--- toasts -->
+    <string name="toast_regFields">You must complete all fields to register</string>
+    <string name="toast_logFields">You must complete all fields to log in</string>
+    <string name="toast_valid">Invalid data entered</string>
+    <string name="toast_name">First name must be 3 to 30 characters</string>
+    <string name="toast_email">Invalid email address</string>
+    <string name="toast_login">Invalid email and password combination</string>
+    <string name="toast_success">You have successfully registered</string>
+    <string name="toast_date">Invalid date of birth, date should be in the format MM/dd/yy</string>
 
 </resources>

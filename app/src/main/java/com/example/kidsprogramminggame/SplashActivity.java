@@ -37,4 +37,8 @@ public class SplashActivity extends AppCompatActivity {
             }
         }, 5000);
     }
+
+    public void goToSignUp(View view) {
+        startActivity(new Intent(this, SignUpActivity.class));
+    }
 }
