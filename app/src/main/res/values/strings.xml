@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">KidsProgrammingGame</string>
+    <!--Text labels-->
+    <string name="app_name">Kids Programming Game</string>
+    <string name="promptLogIn">Already have an account?</string>
+    <string name="promptPlay">Ready to play?</string>
+
+    <!--Button labels-->
+    <string name="label_btnChildSign">Log in as Child</string>
+    <string name="label_btnParentSign">Log in as Parent</string>
+    <string name="label_btnSignUp">Sign Up</string>
+
 </resources>
