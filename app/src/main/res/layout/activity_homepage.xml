@@ -4,66 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashActivity">
+    tools:context=".HomepageActivity">
 
     <TextView
-        android:id="@+id/textLogo"
+        android:id="@+id/textPlay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-smallcaps"
-        android:text="@string/app_name"
+        android:text="@string/promptPlay"
         android:textSize="20sp"
-        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.231" />
+        app:layout_constraintVertical_bias="0.293" />
 
     <Button
-        android:id="@+id/btnSignIn"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/button_rounded"
-        android:text="@string/label_btnSignIn"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textLogo"
-        app:layout_constraintVertical_bias="0.567"
-        android:onClick="gotToSignIn"/>
-
-    <Button
-        android:id="@+id/btnSignUp"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/button_rounded"
-        android:onClick="goToSignUp"
-        android:text="@string/label_btnSignUp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSignIn"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/buttonLevel1"
         android:layout_width="200dp"
-        android:layout_height="193dp"
-        android:contentDescription="@string/image_desc"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_rounded"
+        android:text="@string/level1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textPlay"
+        app:layout_constraintVertical_bias="0.167" />
+
+    <Button
+        android:id="@+id/buttonLevel2"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_rounded"
+        android:text="@string/level2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLevel1"
+        app:layout_constraintVertical_bias="0.16" />
+
+    <Button
+        android:id="@+id/buttonSignOut"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="@string/label_signOut"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.403"
-        app:srcCompat="@drawable/robot" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonLevel2"
+        android:background="@drawable/button_rounded_border"
+        android:onClick="signOut"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

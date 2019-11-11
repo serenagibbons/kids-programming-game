@@ -72,6 +72,7 @@ public class SignUpActivity extends AppCompatActivity {
         // create new intent
         Intent intent = new Intent(this, SplashActivity.class);
         intent.putExtra("Success", valid);
+        intent.putExtra("Initial Screen", false);
         startActivity(intent);
     }
 
@@ -104,6 +105,8 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void goToSplashScreen(View view) {
-        startActivity(new Intent(this, SplashActivity.class));
+        Intent i = new Intent(this, SplashActivity.class);
+        i.putExtra("Initial Screen", false);
+        startActivity(i);
     }
 }
