@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GameActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.004">
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0"
+            android:contentDescription="@string/image_drag"
+            tools:layout_editor_absoluteX="41dp"
+            tools:layout_editor_absoluteY="103dp"
+            tools:srcCompat="@drawable/square_drag_and_drop" />
+
+        <ImageView
+            android:id="@+id/imageDrop2"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0"
+            android:contentDescription="@string/image_drag"
+            tools:layout_editor_absoluteX="41dp"
+            tools:layout_editor_absoluteY="103dp"
+            tools:srcCompat="@drawable/square_drag_and_drop" />
+
+        <ImageView
+            android:id="@+id/imageDrop3"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0"
+            android:contentDescription="@string/image_drag"
+            tools:layout_editor_absoluteX="41dp"
+            tools:layout_editor_absoluteY="103dp"
+            tools:srcCompat="@drawable/square_drag_and_drop" />
+
+        <ImageView
+            android:id="@+id/imageDrop4"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0"
+            android:contentDescription="@string/image_drag"
+            tools:layout_editor_absoluteX="41dp"
+            tools:layout_editor_absoluteY="103dp"
+            tools:srcCompat="@drawable/square_drag_and_drop" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:text="@string/gameGo" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:text="@string/gameReset" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0"
+            android:contentDescription="@string/image_arrow"
+            app:srcCompat="@drawable/arrow_right"
+            tools:layout_editor_absoluteX="41dp"
+            tools:layout_editor_absoluteY="103dp" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0"
+            android:contentDescription="@string/image_arrow"
+            app:srcCompat="@drawable/arrow_up"
+            tools:layout_editor_absoluteX="41dp"
+            tools:layout_editor_absoluteY="103dp" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0"
+            android:contentDescription="@string/image_arrow"
+            app:srcCompat="@drawable/arrow_left"
+            tools:layout_editor_absoluteX="41dp"
+            tools:layout_editor_absoluteY="103dp" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0"
+            android:contentDescription="@string/image_arrow"
+            app:srcCompat="@drawable/arrow_down"
+            tools:layout_editor_absoluteX="41dp"
+            tools:layout_editor_absoluteY="103dp" />
+
+        <Button
+            android:id="@+id/buttonExit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:text="@string/gameExit"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="71dp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

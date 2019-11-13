@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Kids Programming Game</string>
     <string name="image_desc">Logo image</string>
+    <string name="image_drag">Drag and drop image</string>
+    <string name="image_arrow">Arrow image</string>
 
     <!--Prompts-->
     <string name="promptRegister">Don\'t have an account?</string>
@@ -15,6 +17,9 @@
     <string name="label_signOut">Sign Out</string>
     <string name="level1">Level 1</string>
     <string name="level2">Level 2</string>
+    <string name="gameGo">Go</string>
+    <string name="gameReset">Reset</string>
+    <string name="gameExit">Exit</string>
 
     <!--- labels -->
     <string name="label_signUp">Sign up</string>

@@ -19,4 +19,8 @@ public class HomepageActivity extends AppCompatActivity {
         i.putExtra("Initial Screen", false);
         startActivity(i);
     }
+
+    public void playLevel1(View view) {
+        startActivity(new Intent(this, GameActivity.class));
+    }
 }
