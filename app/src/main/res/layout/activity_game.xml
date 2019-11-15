@@ -19,15 +19,15 @@
         app:layout_constraintVertical_bias="0.004">
 
         <ImageView
-            android:id="@+id/imageView7"
+            android:id="@+id/imageDrop1"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_gravity="center_vertical"
             android:layout_weight="0"
             android:contentDescription="@string/image_drag"
+            app:srcCompat="@drawable/drag_drop_square"
             tools:layout_editor_absoluteX="41dp"
-            tools:layout_editor_absoluteY="103dp"
-            tools:srcCompat="@drawable/square_drag_and_drop" />
+            tools:layout_editor_absoluteY="103dp" />
 
         <ImageView
             android:id="@+id/imageDrop2"
@@ -36,9 +36,9 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="0"
             android:contentDescription="@string/image_drag"
+            app:srcCompat="@drawable/drag_drop_square"
             tools:layout_editor_absoluteX="41dp"
-            tools:layout_editor_absoluteY="103dp"
-            tools:srcCompat="@drawable/square_drag_and_drop" />
+            tools:layout_editor_absoluteY="103dp" />
 
         <ImageView
             android:id="@+id/imageDrop3"
@@ -47,9 +47,9 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="0"
             android:contentDescription="@string/image_drag"
+            app:srcCompat="@drawable/drag_drop_square"
             tools:layout_editor_absoluteX="41dp"
-            tools:layout_editor_absoluteY="103dp"
-            tools:srcCompat="@drawable/square_drag_and_drop" />
+            tools:layout_editor_absoluteY="103dp" />
 
         <ImageView
             android:id="@+id/imageDrop4"
@@ -58,9 +58,9 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="0"
             android:contentDescription="@string/image_drag"
+            app:srcCompat="@drawable/drag_drop_square"
             tools:layout_editor_absoluteX="41dp"
-            tools:layout_editor_absoluteY="103dp"
-            tools:srcCompat="@drawable/square_drag_and_drop" />
+            tools:layout_editor_absoluteY="103dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -69,31 +69,34 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/buttonGo"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
+                android:background="@color/green"
                 android:text="@string/gameGo" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/buttonReset"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
+                android:background="@color/lightRed"
                 android:text="@string/gameReset" />
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/imageView1"
+            android:id="@+id/imageArrowRight"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_gravity="center_vertical"
             android:layout_weight="0"
             android:contentDescription="@string/image_arrow"
             app:srcCompat="@drawable/arrow_right"
-            tools:layout_editor_absoluteX="41dp"
-            tools:layout_editor_absoluteY="103dp" />
+            tools:layout_editor_absoluteX="-32dp"
+            tools:layout_editor_absoluteY="254dp"
+            />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/imageArrayUp"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_gravity="center_vertical"
@@ -104,7 +107,7 @@
             tools:layout_editor_absoluteY="103dp" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/imageArrowLeft"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_gravity="center_vertical"
@@ -115,7 +118,7 @@
             tools:layout_editor_absoluteY="103dp" />
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/imageArrowDown"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_gravity="center_vertical"
@@ -131,9 +134,24 @@
             android:layout_height="match_parent"
             android:layout_weight="0"
             android:text="@string/gameExit"
+            android:background="@color/colorAccent"
             tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="71dp" />
+            tools:layout_editor_absoluteY="71dp"
+            android:onClick="exitGame"/>
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imgRobot"
+        android:layout_width="84dp"
+        android:layout_height="95dp"
+        android:contentDescription="@string/image_desc"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout1"
+        app:layout_constraintVertical_bias="0.26"
+        app:srcCompat="@drawable/robot" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
