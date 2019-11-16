@@ -64,7 +64,9 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     public void gotToSignIn(View view) {
-        startActivity(new Intent(this, SignInActivity.class));
+        //startActivity(new Intent(this, SignInActivity.class));
 
+        // for ease of testing go straight to homepage for now
+        startActivity(new Intent(this, GameActivity.class));
     }
 }
