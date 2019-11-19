@@ -12,9 +12,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -24,11 +27,17 @@ public class GameActivity extends AppCompatActivity {
 
     // User-created sequence
     private ImageView[] sequence = {move1, move2, move3, move4};
-    private int[] seq = new int[4];
+    //private String[] stringSeq = {"", "", "", ""};
+    private ArrayList<String> sequenceList = new ArrayList<>();
+
+    final private static String RIGHT = "right";
+    final private static String LEFT = "left";
+    final private static String UP = "up";
+    final private static String DOWN = "down";
 
     // Solution sequence
-    private int[][] solution = {
-            {R.drawable.arrow_right, R.drawable.arrow_down, R.drawable.arrow_right, R.drawable.arrow_down}
+    private String[][] solution = {
+            {RIGHT, DOWN, RIGHT, DOWN}
     };
 
     @Override
@@ -105,6 +114,10 @@ public class GameActivity extends AppCompatActivity {
                         View view = (View) event.getLocalState();
 
                         ((ImageView) v).setImageDrawable( ((ImageView)view).getDrawable());
+
+                        // add to sequence
+                        addToSequence(((ImageView) view).getDrawable(), (ImageView) v);
+
                         //((ImageView) v).setImageDrawable(((ImageView)event.getLocalState()).getBackground());
                         // v.setBackground(((ImageView)event.getLocalState()).getBackground());
 
@@ -164,39 +177,69 @@ public class GameActivity extends AppCompatActivity {
         move3.setImageDrawable(getDrawable(R.drawable.drag_drop_square));
         move4.setImageDrawable(getDrawable(R.drawable.drag_drop_square));
 
-        /*for (int i = 0; i < 4; ++i) {
-            sequence[i] = null;
-        }*/
+        // clear string sequence list
+        sequenceList.clear();
+
     }
 
     public void playGame(View view) {
-        /*
-        TranslateAnimation animation = new TranslateAnimation(0, 400, 0, 0);
-        animation.setDuration(1000);
-        animation.setFillAfter(true);
-        robot.startAnimation(animation);*/
-
-        /*createSequence();
-
         boolean isCorrectSequence = true;
 
+        //String[] sequenceArray = (String []) sequenceList.toArray();
+        //Toast.makeText(this, sequenceArray[0], Toast.LENGTH_LONG).show();
+
+        if (sequenceList.isEmpty()) {
+            return;
+        }
+
         for (int i = 0; i < 4; ++i) {
-            if (seq[i] != solution[0][i])
+            Toast.makeText(this, sequenceList.get(i), Toast.LENGTH_LONG).show();
+            if (!sequenceList.get(i).equals(solution[0][i])) {
                 isCorrectSequence = false;
+            }
         }
 
         if (isCorrectSequence) {
-        String value = sequence[0].getResources().getResourceEntryName(sequence[0].getId());
-*/
-        //Toast.makeText(this, "", Toast.LENGTH_LONG).show();
-
-            Animation animation = AnimationUtils.loadAnimation(this, R.anim.translate);
+            Animation animation = AnimationUtils.loadAnimation(this, R.anim.translate_1);
             robot.startAnimation(animation);
-        //}
-
-
+        }
     }
 
+    private void addToSequence(Drawable drawable, ImageView imageView) {
+        if (drawable.equals(right.getDrawable())) {
+            sequenceList.add(RIGHT);
+        }
+        if (drawable.equals(left.getDrawable())) {
+            sequenceList.add(LEFT);
+        }
+        if (drawable.equals(down.getDrawable())) {
+            sequenceList.add(DOWN);
+        }
+        if (drawable.equals(up.getDrawable())) {
+            sequenceList.add(UP);
+        }
+
+
+        /*
+        for (int i = 0; i < 4; ++i) {
+            if (imageView.equals(sequence[i])){
+                if (drawable.equals(right.getDrawable())) {
+                    stringSeq[i] = RIGHT;
+                }
+                if (drawable.equals(left.getDrawable())) {
+                    stringSeq[i] = LEFT;
+                }
+                if (drawable.equals(down.getDrawable())) {
+                    stringSeq[i] = DOWN;
+                }
+                if (drawable.equals(up.getDrawable())) {
+                    stringSeq[i] = UP;
+                }
+            }
+        }
+         */
+    }
+    /*
     private void createSequence() {
         for (int i = 0; i < 4; ++i) {
             String value = sequence[i].getResources().getResourceEntryName(sequence[i].getId());
@@ -216,6 +259,6 @@ public class GameActivity extends AppCompatActivity {
                     break;
             }
         }
-    }
+    }*/
 }
 
