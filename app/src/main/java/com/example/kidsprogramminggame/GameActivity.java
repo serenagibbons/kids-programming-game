@@ -194,9 +194,12 @@ public class GameActivity extends AppCompatActivity {
     public void playGame(View view) {
         boolean isCorrectSequence = true;
 
-        if (sequenceList.isEmpty()) {
+        if (sequenceList.isEmpty() || sequenceList.size() < 4) {
+            reset();
+            incorrectAttempt(levelNum);
             return;
         }
+
 
         for (int i = 0; i < 4; ++i) {
             if (!sequenceList.get(i).equals(solution[0][i])) {
