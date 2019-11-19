@@ -17,13 +17,13 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class GameActivity extends AppCompatActivity {
 
     private int levelNum = 1;
+    Animation animation;
 
     private ConstraintLayout constraintLayout;
     private ImageView robot;
@@ -32,7 +32,6 @@ public class GameActivity extends AppCompatActivity {
 
     // User-created sequence
     private ImageView[] sequence = {move1, move2, move3, move4};
-    //private String[] stringSeq = {"", "", "", ""};
     private ArrayList<String> sequenceList = new ArrayList<>();
 
     final private static String RIGHT = "right";
@@ -42,7 +41,8 @@ public class GameActivity extends AppCompatActivity {
 
     // Solution sequence
     private String[][] solution = {
-            {RIGHT, DOWN, RIGHT, DOWN}
+            {RIGHT, DOWN, RIGHT, DOWN},
+            {RIGHT, DOWN, RIGHT, UP}
     };
 
     @Override
@@ -67,6 +67,7 @@ public class GameActivity extends AppCompatActivity {
         left = findViewById((R.id.imageArrowLeft));
         up = findViewById((R.id.imageArrowUp));
         down = findViewById((R.id.imageArrowDown));
+
 
         View.OnLongClickListener onLongClickListener = new View.OnLongClickListener() {
             @Override
@@ -196,32 +197,40 @@ public class GameActivity extends AppCompatActivity {
 
         if (sequenceList.isEmpty() || sequenceList.size() < 4) {
             reset();
-            incorrectAttempt(levelNum);
+            incorrectAttempt();
             return;
         }
 
 
         for (int i = 0; i < 4; ++i) {
-            if (!sequenceList.get(i).equals(solution[0][i])) {
+            if (!sequenceList.get(i).equals(solution[levelNum - 1][i])) {
                 isCorrectSequence = false;
             }
         }
 
         if (isCorrectSequence) {
-            Animation animation = AnimationUtils.loadAnimation(this, R.anim.translate_1);
+            switch (levelNum) {
+                case 1:
+                    animation = AnimationUtils.loadAnimation(this, R.anim.translate_1);
+                    break;
+                case 2:
+                    animation = AnimationUtils.loadAnimation(this, R.anim.translate_2);
+                    break;
+            }
+
             robot.startAnimation(animation);
 
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    levelComplete(levelNum);
+                    levelComplete();
                 }
             }, 4000);
 
         }
         else {
             reset();
-            incorrectAttempt(levelNum);
+            incorrectAttempt();
         }
     }
 
@@ -242,35 +251,23 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    // go to the next level
-    public void nextLevel(int n) {
+    // load level
+    public void loadLevel(int n) {
         // reset sequence and ImageViews
         reset();
 
-        // update layout
-        switch (++n) {
-            case 1:
-                constraintLayout.setBackground(getDrawable(R.drawable.game_background_level1));
-                break;
-            case 2:
-                constraintLayout.setBackground(getDrawable(R.drawable.game_background2));
-                break;
-        }
-    }
-
-    // repeat level
-    public void repeatLevel(int n) {
         // update layout
         switch (n) {
             case 1:
                 constraintLayout.setBackground(getDrawable(R.drawable.game_background_level1));
                 break;
             case 2:
-                constraintLayout.setBackground(getDrawable(R.drawable.game_background2));
+                constraintLayout.setBackground(getDrawable(R.drawable.game_background_level2));
                 break;
         }
     }
-    public void incorrectAttempt(final int level) {
+
+    public void incorrectAttempt() {
         AlertDialog.Builder adb = new AlertDialog.Builder(GameActivity.this);
         // show user score
         adb.setMessage("Incorrect attempt\n").setCancelable(false)
@@ -282,7 +279,7 @@ public class GameActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // repeat level
-                        repeatLevel(level);
+                        loadLevel(levelNum);
                     }
                 })
                 // exit game, return to MainActivity
@@ -297,29 +294,52 @@ public class GameActivity extends AppCompatActivity {
         alert.show();
     }
 
-    public void levelComplete(final int level) {
+    public void levelComplete() {
         AlertDialog.Builder adb = new AlertDialog.Builder(GameActivity.this);
         // show user score
-        adb.setMessage("Level complete!\n").setCancelable(false)
-                //"Your score is " + score + "/" + questions.length + (".\n" +
-                //"Your time is " + strTime))
-                //.setCancelable(false)
-                // allow user to play game again, restart GameActivity
-                .setPositiveButton("Next level", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        // go to next level
-                        nextLevel(level);
-                    }
-                })
-                // exit game, return to MainActivity
-                .setNegativeButton("Repeat level", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        // play level again
-                        repeatLevel(level);
-                    }
-                });
+        if (levelNum < 2) {
+            adb.setMessage("Level complete!\n").setCancelable(false)
+                    //"Your score is " + score + "/" + questions.length + (".\n" +
+                    //"Your time is " + strTime))
+                    //.setCancelable(false)
+                    // allow user to play game again, restart GameActivity
+                    .setPositiveButton("Next level", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            // go to next level
+                            loadLevel(++levelNum);
+                        }
+                    })
+                    // exit game, return to MainActivity
+                    .setNegativeButton("Repeat level", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            // play level again
+                            loadLevel(levelNum);
+                        }
+                    });
+        }
+        else {
+            adb.setMessage("Game complete!\n").setCancelable(false)
+                    //"Your score is " + score + "/" + questions.length + (".\n" +
+                    //"Your time is " + strTime))
+                    //.setCancelable(false)
+                    // allow user to play game again, restart GameActivity
+                    .setPositiveButton("Complete", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            startActivity(new Intent(getApplicationContext(), HomepageActivity.class));
+                        }
+                    })
+                    // exit game, return to MainActivity
+                    .setNegativeButton("Repeat level", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            // play level again
+                            loadLevel(levelNum);
+                        }
+                    });
+        }
         AlertDialog alert = adb.create();
         alert.show();
     }
