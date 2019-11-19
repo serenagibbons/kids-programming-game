@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/game_background_level1"
     tools:context=".GameActivity">
 
     <LinearLayout
@@ -147,15 +147,16 @@
 
     <ImageView
         android:id="@+id/imgRobot"
-        android:layout_width="84dp"
-        android:layout_height="95dp"
+        android:layout_width="71dp"
+        android:layout_height="69dp"
         android:contentDescription="@string/image_desc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout1"
-        app:layout_constraintVertical_bias="0.168"
+        app:layout_constraintVertical_bias="0.231"
         app:srcCompat="@drawable/robot" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

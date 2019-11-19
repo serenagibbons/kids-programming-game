@@ -3,6 +3,7 @@
     <string name="image_desc">Robot image</string>
     <string name="image_drag">Drag and drop image</string>
     <string name="image_arrow">Arrow image</string>
+    <string name="image_cpu">CPU image</string>
     <string name="image_gameBackground">Game background image</string>
 
     <!--Prompts-->

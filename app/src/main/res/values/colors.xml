@@ -9,5 +9,6 @@
     <color name="lightRed">#F77268</color>
     <color name="yellow">#FFD556</color>
     <color name="lightBlue">#A4DFE9</color>
+    <color name="path">#D3D3D3</color>
 
 </resources>

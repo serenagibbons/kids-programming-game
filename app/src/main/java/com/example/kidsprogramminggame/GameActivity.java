@@ -5,13 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -20,14 +23,13 @@ public class GameActivity extends AppCompatActivity {
     private ImageView left, up, right, down;	// Arrow options to drag
 
     // User-created sequence
-    //private ImageView[] sequence = {move1, move2, move3, move4};
+    private ImageView[] sequence = {move1, move2, move3, move4};
+    private int[] seq = new int[4];
 
     // Solution sequence
-    private Integer[][] solution = {
+    private int[][] solution = {
             {R.drawable.arrow_right, R.drawable.arrow_down, R.drawable.arrow_right, R.drawable.arrow_down}
     };
-
-    private android.widget.LinearLayout.LayoutParams layoutParams;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,15 +170,52 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void playGame(View view) {
-        /*TranslateAnimation animation = new TranslateAnimation(0, 100, 0, 0);
+        /*
+        TranslateAnimation animation = new TranslateAnimation(0, 400, 0, 0);
         animation.setDuration(1000);
         animation.setFillAfter(true);
-        //animation.setAnimationListener(new MyAnimationListener());
-        */
+        robot.startAnimation(animation);*/
 
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.translate);
-        robot.startAnimation(animation);
+        /*createSequence();
 
+        boolean isCorrectSequence = true;
+
+        for (int i = 0; i < 4; ++i) {
+            if (seq[i] != solution[0][i])
+                isCorrectSequence = false;
+        }
+
+        if (isCorrectSequence) {
+        String value = sequence[0].getResources().getResourceEntryName(sequence[0].getId());
+*/
+        //Toast.makeText(this, "", Toast.LENGTH_LONG).show();
+
+            Animation animation = AnimationUtils.loadAnimation(this, R.anim.translate);
+            robot.startAnimation(animation);
+        //}
+
+
+    }
+
+    private void createSequence() {
+        for (int i = 0; i < 4; ++i) {
+            String value = sequence[i].getResources().getResourceEntryName(sequence[i].getId());
+            //int drawableId = (Integer) sequence[i].getTag();
+            switch (value) {
+                case "imageArrowRight":
+                    seq[i] = R.drawable.arrow_right;
+                    break;
+                case "imageArrowLeft":
+                    seq[i] = R.drawable.arrow_left;
+                    break;
+                case "imageArrowDown":
+                    seq[i] = R.drawable.arrow_down;
+                    break;
+                case "imageArrowUp":
+                    seq[i] = R.drawable.arrow_up;
+                    break;
+            }
+        }
     }
 }
 
