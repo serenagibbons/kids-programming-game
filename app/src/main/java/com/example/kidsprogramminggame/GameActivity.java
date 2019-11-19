@@ -1,12 +1,16 @@
 package com.example.kidsprogramminggame;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.ClipData;
 import android.content.ClipDescription;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,12 +19,13 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class GameActivity extends AppCompatActivity {
 
+    private int levelNum = 1;
+
+    private ConstraintLayout constraintLayout;
     private ImageView robot;
     private ImageView move1, move2, move3, move4; // User-created moves by dropping arrows
     private ImageView left, up, right, down;	// Arrow options to drag
@@ -48,6 +53,8 @@ public class GameActivity extends AppCompatActivity {
         // make activity full screen (hide actionbar)
         if (getSupportActionBar() != null)
             this.getSupportActionBar().hide();
+
+        constraintLayout = findViewById(R.id.constraintLayout);
 
         robot = findViewById(R.id.imgRobot);
 
@@ -116,7 +123,7 @@ public class GameActivity extends AppCompatActivity {
                         ((ImageView) v).setImageDrawable( ((ImageView)view).getDrawable());
 
                         // add to sequence
-                        addToSequence(((ImageView) view).getDrawable(), (ImageView) v);
+                        addToSequence(((ImageView) view).getDrawable());
 
                         //((ImageView) v).setImageDrawable(((ImageView)event.getLocalState()).getBackground());
                         // v.setBackground(((ImageView)event.getLocalState()).getBackground());
@@ -172,28 +179,26 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void resetSequence(View view) {
+        reset();
+    }
+
+    private void reset() {
         move1.setImageDrawable(getDrawable(R.drawable.drag_drop_square));
         move2.setImageDrawable(getDrawable(R.drawable.drag_drop_square));
         move3.setImageDrawable(getDrawable(R.drawable.drag_drop_square));
         move4.setImageDrawable(getDrawable(R.drawable.drag_drop_square));
 
-        // clear string sequence list
         sequenceList.clear();
-
     }
 
     public void playGame(View view) {
         boolean isCorrectSequence = true;
-
-        //String[] sequenceArray = (String []) sequenceList.toArray();
-        //Toast.makeText(this, sequenceArray[0], Toast.LENGTH_LONG).show();
 
         if (sequenceList.isEmpty()) {
             return;
         }
 
         for (int i = 0; i < 4; ++i) {
-            Toast.makeText(this, sequenceList.get(i), Toast.LENGTH_LONG).show();
             if (!sequenceList.get(i).equals(solution[0][i])) {
                 isCorrectSequence = false;
             }
@@ -202,10 +207,23 @@ public class GameActivity extends AppCompatActivity {
         if (isCorrectSequence) {
             Animation animation = AnimationUtils.loadAnimation(this, R.anim.translate_1);
             robot.startAnimation(animation);
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    levelComplete(levelNum);
+                }
+            }, 4000);
+
+        }
+        else {
+            reset();
+            incorrectAttempt(levelNum);
         }
     }
 
-    private void addToSequence(Drawable drawable, ImageView imageView) {
+    // add moves to the user sequence
+    private void addToSequence(Drawable drawable) {
         if (drawable.equals(right.getDrawable())) {
             sequenceList.add(RIGHT);
         }
@@ -219,46 +237,88 @@ public class GameActivity extends AppCompatActivity {
             sequenceList.add(UP);
         }
 
-
-        /*
-        for (int i = 0; i < 4; ++i) {
-            if (imageView.equals(sequence[i])){
-                if (drawable.equals(right.getDrawable())) {
-                    stringSeq[i] = RIGHT;
-                }
-                if (drawable.equals(left.getDrawable())) {
-                    stringSeq[i] = LEFT;
-                }
-                if (drawable.equals(down.getDrawable())) {
-                    stringSeq[i] = DOWN;
-                }
-                if (drawable.equals(up.getDrawable())) {
-                    stringSeq[i] = UP;
-                }
-            }
-        }
-         */
     }
-    /*
-    private void createSequence() {
-        for (int i = 0; i < 4; ++i) {
-            String value = sequence[i].getResources().getResourceEntryName(sequence[i].getId());
-            //int drawableId = (Integer) sequence[i].getTag();
-            switch (value) {
-                case "imageArrowRight":
-                    seq[i] = R.drawable.arrow_right;
-                    break;
-                case "imageArrowLeft":
-                    seq[i] = R.drawable.arrow_left;
-                    break;
-                case "imageArrowDown":
-                    seq[i] = R.drawable.arrow_down;
-                    break;
-                case "imageArrowUp":
-                    seq[i] = R.drawable.arrow_up;
-                    break;
-            }
+
+    // go to the next level
+    public void nextLevel(int n) {
+        // reset sequence and ImageViews
+        reset();
+
+        // update layout
+        switch (++n) {
+            case 1:
+                constraintLayout.setBackground(getDrawable(R.drawable.game_background_level1));
+                break;
+            case 2:
+                constraintLayout.setBackground(getDrawable(R.drawable.game_background2));
+                break;
         }
-    }*/
+    }
+
+    // repeat level
+    public void repeatLevel(int n) {
+        // update layout
+        switch (n) {
+            case 1:
+                constraintLayout.setBackground(getDrawable(R.drawable.game_background_level1));
+                break;
+            case 2:
+                constraintLayout.setBackground(getDrawable(R.drawable.game_background2));
+                break;
+        }
+    }
+    public void incorrectAttempt(final int level) {
+        AlertDialog.Builder adb = new AlertDialog.Builder(GameActivity.this);
+        // show user score
+        adb.setMessage("Incorrect attempt\n").setCancelable(false)
+                //"Your score is " + score + "/" + questions.length + (".\n" +
+                //"Your time is " + strTime))
+                //.setCancelable(false)
+                // allow user to play game again, restart GameActivity
+                .setPositiveButton("Try again", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // repeat level
+                        repeatLevel(level);
+                    }
+                })
+                // exit game, return to MainActivity
+                .setNegativeButton("Exit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // exit game
+                        startActivity(new Intent(getApplicationContext(), HomepageActivity.class));
+                    }
+                });
+        AlertDialog alert = adb.create();
+        alert.show();
+    }
+
+    public void levelComplete(final int level) {
+        AlertDialog.Builder adb = new AlertDialog.Builder(GameActivity.this);
+        // show user score
+        adb.setMessage("Level complete!\n").setCancelable(false)
+                //"Your score is " + score + "/" + questions.length + (".\n" +
+                //"Your time is " + strTime))
+                //.setCancelable(false)
+                // allow user to play game again, restart GameActivity
+                .setPositiveButton("Next level", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // go to next level
+                        nextLevel(level);
+                    }
+                })
+                // exit game, return to MainActivity
+                .setNegativeButton("Repeat level", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // play level again
+                        repeatLevel(level);
+                    }
+                });
+        AlertDialog alert = adb.create();
+        alert.show();
+    }
 }
 
